@@ -3,6 +3,7 @@ require 'sinatra'
 require 'slim'
 require 'sass'
 require 'sinatra/reloader' if development?
+require 'sinatra/flash'
 require './song'
 
 set :public_folder, 'public'
@@ -12,6 +13,26 @@ configure do
   enable :sessions
   set :username, 'frank'
   set :password, 'sinatra'
+end
+
+helpers do
+  def css(*stylesheets)
+    stylesheets.map do |stylesheet|
+      "link href=\"/#{stylesheet}.css\" media=\"screen, projection\" rel=\"stylesheet\" />"
+    end.join
+  end
+
+  def current?(path='/')
+    (request.path==path || request.path==path+'/') ? "current" : nil
+  end
+
+  def set_title
+    @title ||= "Songs By Sinatra"
+  end
+end
+
+before do
+  set_title
 end
 
 get '/set/:name' do

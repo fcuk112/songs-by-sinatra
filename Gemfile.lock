@@ -81,6 +81,8 @@ GEM
       rack-test
       sinatra (~> 1.3.0)
       tilt (~> 1.3)
+    sinatra-flash (0.3.0)
+      sinatra (>= 1.0.0)
     slim (1.3.6)
       temple (~> 0.5.5)
       tilt (~> 1.3.3)
@@ -105,6 +107,7 @@ DEPENDENCIES
   sass
   sinatra
   sinatra-contrib
+  sinatra-flash
   slim
   sqlite3
   thin
