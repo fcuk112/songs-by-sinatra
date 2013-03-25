@@ -1,4 +1,5 @@
 require "bundler/setup"
+require 'pony'
 require 'sinatra'
 require 'slim'
 require 'sass'
@@ -29,6 +30,25 @@ helpers do
   def set_title
     @title ||= "Songs By Sinatra"
   end
+
+  def send_message
+    Pony.mail(
+      :from => params[:name] + "<" + params[:email] + ">",
+      :to => 'fcuk112@gmail.com',
+      :subject => params[:name] + " has contacted you",
+      :body => params[:message],
+      :port => '587',
+      :via => :smtp,
+      :via_options => {
+      :address => 'smtp.gmail.com',
+        :port => '587',
+        :enable_starttls_auto => true,
+        :user_name => 'fcuk112',
+        :password => 'secret',
+        :authentication => :plain,
+        :domain => 'localhost.localdomain'
+    })
+  end
 end
 
 before do
@@ -56,6 +76,12 @@ end
 
 get '/contact' do
   slim :contact
+end
+
+post '/contact' do
+  send_message
+  flash[:notice] = "Thank you for your message.  We'll be in touch soon."
+  redirect to('/')
 end
 
 get '/instance' do

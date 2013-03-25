@@ -1,5 +1,6 @@
 source "http://rubygems.org"
 
+gem 'pony'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-flash'
