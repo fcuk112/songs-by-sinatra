@@ -34,7 +34,7 @@ helpers do
   def send_message
     Pony.mail(
       :from => params[:name] + "<" + params[:email] + ">",
-      :to => 'fcuk112@gmail.com',
+      :to => :email_address,
       :subject => params[:name] + " has contacted you",
       :body => params[:message],
       :port => '587',
@@ -43,10 +43,10 @@ helpers do
       :address => 'smtp.gmail.com',
         :port => '587',
         :enable_starttls_auto => true,
-        :user_name => 'fcuk112',
-        :password => 'secret',
+        :user_name => :email_user_name,
+        :password => :email_password,
         :authentication => :plain,
-        :domain => 'localhost.localdomain'
+        :domain => :email_domain
     })
   end
 end
