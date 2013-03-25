@@ -40,7 +40,7 @@ helpers do
       :port => '587',
       :via => :smtp,
       :via_options => {
-      :address => 'smtp.gmail.com',
+      :address => :email_domain,
         :port => '587',
         :enable_starttls_auto => true,
         :user_name => :email_user_name,
